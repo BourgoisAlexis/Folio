@@ -1,0 +1,27 @@
+﻿@using Folio.Models;
+
+
+<div class="d-flex justify-content-center">
+    <div class=@(Vertical ? "vertical" : "horizontal") style="border-radius:0.125em"></div>
+</div>
+
+
+@code {
+    [Parameter] public bool Vertical { get; set; }
+}
+
+<style>
+    .vertical {
+        background-color: @AppConst.colorTint;
+        width: 0.25rem;
+        height: 8rem;
+        margin: 2rem;
+    }
+
+    .horizontal {
+        background-color: @AppConst.colorTint;
+        width: 15rem;
+        height: 0.25rem;
+        margin: 2rem;
+    }
+</style>

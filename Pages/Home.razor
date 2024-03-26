@@ -1,0 +1,80 @@
+﻿@using Folio.Models;
+@using Folio.Components;
+@page "/"
+
+<PageTitle>Folio</PageTitle>
+
+<h1>
+    Folio
+</h1>
+
+<SeparatorView Vertical=true></SeparatorView>
+<SectionView Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
+<br/>
+<SectionView Title=@($"Favorite games") Projects="_favoriteGames"></SectionView>
+<SeparatorView Vertical=true></SeparatorView>
+<SectionView Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
+<SeparatorView Vertical=true></SeparatorView>
+<SectionView Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
+<SeparatorView Vertical=true></SeparatorView>
+<SectionView Title=@($"Resume") Skills="_skills"></SectionView>
+<SeparatorView Vertical=false></SeparatorView>
+
+<footer style="text-align:center">
+    Contacts
+</footer>
+
+
+
+@code {
+    private ProjectModel[] _professionnalProjects = new ProjectModel[] { };
+    private ProjectModel[] _personnalProjects = new ProjectModel[] { };
+    private ProjectModel[] _favoriteGames = new ProjectModel[] { };
+    private SkillModel[] _skills = new SkillModel[] { };
+
+    protected override Task OnInitializedAsync() {
+
+        _professionnalProjects = new ProjectModel[] {
+            new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis, "/genesis.png",
+                Utils.GetTagsFromList(new string[]{"c#", "js", "unity", "online", "multi"})),
+            new ProjectModel("After chill", AppConst.descriptionAfterChill, "/after-chill.png",
+                Utils.GetTagsFromList(new string[]{"c#", "unity", "vr", "3d"}))
+    };
+
+        _personnalProjects = new ProjectModel[] {
+            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch, "/versus-punch.png",
+                Utils.GetTagsFromList(new string[]{"c#", "unity", "multi"})),
+            new ProjectModel("Femora", AppConst.descriptionFemora, "/femora.png",
+                Utils.GetTagsFromList(new string[]{"c#", "unity", "3d", "ui", "ux"})),
+            new ProjectModel("Katra Ball", AppConst.descriptionKatraBall, "/katra-ball.png",
+                Utils.GetTagsFromList(new string[]{"c#", "unity", "2d"})),
+            new ProjectModel("Katra Heroes", AppConst.descriptionKatraHeroes, "/katra-heroes.png",
+                Utils.GetTagsFromList(new string[]{"c#", "unity", "online"})),
+            new ProjectModel("This site", AppConst.descriptionFolio, "",
+                Utils.GetTagsFromList(new string[]{"c#", "html", "css", "blazor"})),
+    };
+
+        _skills = new SkillModel[] {
+            Utils.SkillFromTag(AppConst.tags["c#"]),
+            Utils.SkillFromTag(AppConst.tags["js"]),
+            Utils.SkillFromTag(AppConst.tags["c++"]),
+            Utils.SkillFromTag(AppConst.tags["html"]),
+            Utils.SkillFromTag(AppConst.tags["css"]),
+            Utils.SkillFromTag(AppConst.tags["unity"])
+    };
+
+        //BOTW
+        //FF12
+        //Abzu
+        //Mario Odyssey
+        //Portal 2
+
+        _favoriteGames = new ProjectModel[] {
+            new ProjectModel("Zelda: Breath of the wild", AppConst.descriptionBOTW, "/botw.png"),
+            new ProjectModel("Final fantasy XII", AppConst.descriptionFFXII, "/ff-xii.png"),
+            new ProjectModel("Abzu", AppConst.descriptionAbzu, "/abzu.png")
+    };
+
+        return base.OnInitializedAsync();
+    }
+}

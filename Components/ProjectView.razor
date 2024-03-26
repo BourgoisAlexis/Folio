@@ -1,0 +1,127 @@
+﻿@using Folio.Models;
+
+<div class="project-container animated">
+    <div style="margin:inherit">
+        <div class="project-frame stacker animated">
+            <div class="stacked bg-img animated"
+                 style="background-image:url(@Project.background);
+                background-color:@(GetBackgroundColor())"></div>
+            <span class="stacked animated">@Project.description</span>
+        </div>
+        <div style="display:flex; justify-content:center; align-items:center">
+            <p>
+                @Project.name
+            </p>
+        </div>
+        @if (Project.tags != null) {
+
+            <div class="frame-separator"></div>
+
+            int perLine = 3;
+
+            for (int y = 0; y < Project.tags.Length; y += perLine) {
+                <div class="w-100">
+                    @for (int x = 0; x < perLine; x++) {
+                        int index = y + x;
+                        if (index < Project.tags.Length) {
+                            <SkillView Tag="Project.tags[index]" Height="2" Width="3" DisplayAsTag=true></SkillView>
+                        }
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public ProjectModel Project { get; set; }
+
+    private float _borderWidth = 0.15f;
+    private float _baseWidth = 14f;
+    private float _margin = 0.5f;
+    private float _widthVariation = 4f;
+
+    private string GetBackgroundColor() {
+        return string.IsNullOrEmpty(Project.background) ? AppConst.colorSuperTone : "#00000000";
+    }
+}
+
+
+<style>
+    .project-container {
+        display: flex;
+        flex-direction: column;
+        width: @(Utils.FloatToREM(_baseWidth));
+        text-align: center;
+        align-items: center;
+        margin: @(Utils.FloatToREM(_margin));
+        border-style: solid;
+        border-color: @(AppConst.colorSuperTone);
+        border-radius: 1.5rem;
+        border-width: @(Utils.FloatToREM(_borderWidth));
+        pointer-events: none;
+    }
+
+        .project-container p {
+            font-size: large;
+            margin-top: @(Utils.FloatToREM(_margin));
+            margin-bottom: 0;
+            width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
+        }
+
+        .project-container:hover {
+            width: @(Utils.FloatToREM(_baseWidth + _widthVariation));
+            transition-property: width;
+        }
+
+            .project-container:hover .project-frame {
+                width: @(Utils.FloatToREM(_baseWidth + _widthVariation - _margin * 2));
+            }
+
+                .project-container:hover .project-frame .bg-img {
+                    filter: blur(5px) brightness(0.5);
+                    transition-property: filter;
+                }
+
+                .project-container:hover .project-frame span {
+                    color: @AppConst.light;
+                    left: @(Utils.FloatToREM(_widthVariation / 2));
+                    transition-property: color, left;
+                }
+
+    .project-frame {
+        width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
+        height: 10rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition-property: width;
+        pointer-events: auto;
+    }
+
+        .project-frame span {
+            color: transparent;
+            z-index: 10;
+            width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
+            font-size-adjust:inherit;
+            left: 0rem;
+            transition-property: color, left;
+            font-weight: bold;
+        }
+
+    .bg-img {
+        background-position: center;
+        background-size: cover;
+        z-index: 0;
+        transition-property: filter;
+    }
+
+    .frame-separator {
+        height: @($"{Utils.ConvertFloatToString(_borderWidth)}rem");
+        width: 100%;
+        margin-top: @(Utils.FloatToREM(_margin));
+        margin-bottom: @(Utils.FloatToREM(_margin));
+        background-color: @(AppConst.colorSuperTone);
+        border-radius: @($"{Utils.ConvertFloatToString(_borderWidth / 2)}rem");
+    }
+</style>

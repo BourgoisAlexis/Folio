@@ -1,0 +1,50 @@
+﻿@using Folio.Models;
+
+<div>
+    <div class="d-flex flex-column justify-content-center align-content-center">
+        <h2>
+            @if (!string.IsNullOrEmpty(Title)) {
+                @Title
+            }
+        </h2>
+
+        @if (!string.IsNullOrEmpty(Text)) {
+            <div class="d-flex justify-content-center">
+                <p class="w-50" style="font-size:inherit">
+                    @Utils.ConvertNewLinesToBreaks(Text)
+                </p>
+            </div>
+        }
+
+        @if (Projects != null) {
+            int perLine = 4;
+
+            for (int y = 0; y < Projects.Length; y += perLine) {
+                <div class="d-flex flex-row justify-content-center">
+                    @for (int x = 0; x < perLine; x++) {
+                        int index = y + x;
+                        if (index < Projects.Length) {
+                            <ProjectView Project="Projects[index]"></ProjectView>
+                        }
+                    }
+                </div>
+            }
+        }
+
+        @if (Skills != null) {
+            <div class="d-flex flex-row justify-content-center">
+                @for (int i = 0; i < Skills.Length; i++) {
+                    <SkillView Tag="Skills[i]" Height="2" Width="5"></SkillView>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string Text { get; set; }
+    [Parameter] public ProjectModel[] Projects { get; set; }
+    [Parameter] public SkillModel[] Skills { get; set; }
+}

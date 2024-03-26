@@ -1,0 +1,71 @@
+﻿@using Folio.Models
+@using Folio
+@using System.Globalization;
+
+<div class="skill-container stacker"
+     style="height:@($"{Height}rem");
+        width:@($"{Width}rem");
+        border-radius: @(GetBorderRadius());
+        background-color: @(GetColor());
+        --fill-width: @(GetFillWidth());">
+
+    <div class="stacked skill-fill animated"></div>
+    <span class="stacked" style="font-size:@(GetFontSize())">@(Tag.name)</span>
+</div>
+
+
+@code {
+    #region Variables
+    [Parameter] public TagModel Tag { get; set; }
+    [Parameter] public float Height { get; set; }
+    [Parameter] public float Width { get; set; }
+    [Parameter] public bool DisplayAsTag { get; set; }
+
+    private float _max = 3;
+
+    private SkillModel Skill => Utils.SkillFromTag(Tag);
+    private bool ShowLevel => Skill.level > 0;
+    #endregion
+
+    private string GetFillWidth() {
+        int value = (int)Math.Ceiling((float)Skill.level / _max * 100);
+        return $"{((ShowLevel && !DisplayAsTag) ? value : 0)}%";
+    }
+
+    private string GetBorderRadius() {
+        return $"{Utils.ConvertFloatToString(Height * 0.5f)}rem";
+    }
+
+    private string GetFontSize() {
+        return $"{Utils.ConvertFloatToString(Height * 0.4f)}rem";
+    }
+
+    private string GetColor() {
+        return (ShowLevel && !DisplayAsTag) ? AppConst.colorSuperTone : Tag.color;
+    }
+}
+
+
+<style>
+    :root {
+        --fill-width: @(GetFillWidth());
+    }
+
+    .skill-container {
+        display: inline-block;
+        overflow: hidden;
+        margin: 0.2rem;
+    }
+
+        .skill-container:hover .skill-fill {
+            width: var(--fill-width) !important;
+            transition-property: width;
+        }
+
+    .skill-fill {
+        width: 0% !important;
+        background-color: @AppConst.color;
+        transition-property: width;
+    }
+
+</style>
