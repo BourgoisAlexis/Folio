@@ -1,5 +1,6 @@
 ﻿@using Folio.Models;
 @using Folio.Components;
+@using Folio.Client;
 @page "/"
 
 <PageTitle>Folio</PageTitle>
@@ -10,14 +11,18 @@
 
 <SeparatorView Vertical=true></SeparatorView>
 <SectionView Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
-<br/>
-<SectionView Title=@($"Favorite games") Projects="_favoriteGames"></SectionView>
+<br />
+<SectionView Title=@($"My favorite games") Projects="_favoriteGames"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
 <SectionView Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
 <SectionView Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
-<SectionView Title=@($"Resume") Skills="_skills"></SectionView>
+<SectionView Title=@($"Resume") Skills="_languages"></SectionView>
+<br />
+<SectionView Skills="_softwares"></SectionView>
+<br />
+<SectionView Skills="_skills"></SectionView>
 <SeparatorView Vertical=false></SeparatorView>
 
 <footer style="text-align:center">
@@ -30,37 +35,71 @@
     private ProjectModel[] _professionnalProjects = new ProjectModel[] { };
     private ProjectModel[] _personnalProjects = new ProjectModel[] { };
     private ProjectModel[] _favoriteGames = new ProjectModel[] { };
+    private SkillModel[] _languages = new SkillModel[] { };
+    private SkillModel[] _softwares = new SkillModel[] { };
     private SkillModel[] _skills = new SkillModel[] { };
 
     protected override Task OnInitializedAsync() {
 
         _professionnalProjects = new ProjectModel[] {
             new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis, "/genesis.png",
-                Utils.GetTagsFromList(new string[]{"c#", "js", "unity", "online", "multi"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.JS, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
+                "https://mutantsgenesis.com/en/"),
+
             new ProjectModel("After chill", AppConst.descriptionAfterChill, "/after-chill.png",
-                Utils.GetTagsFromList(new string[]{"c#", "unity", "vr", "3d"}))
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Lead, TagEnum.VR}),
+                "https://www.artstation.com/artwork/183gnL"),
+
+            new ProjectModel("Les grands migrateurs", AppConst.descriptionGrandsMigrateurs, "/grands-migrateurs.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity}),
+                "https://www.choisistaplanete.com/les-grands-migrateurs")
     };
+
 
         _personnalProjects = new ProjectModel[] {
             new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch, "/versus-punch.png",
-                Utils.GetTagsFromList(new string[]{"c#", "unity", "multi"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
+                "https://katra-production.itch.io/versus-punch"),
+
             new ProjectModel("Femora", AppConst.descriptionFemora, "/femora.png",
-                Utils.GetTagsFromList(new string[]{"c#", "unity", "3d", "ui", "ux"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.UI, TagEnum.UX}),
+                "https://piktura.itch.io/femora"),
+
             new ProjectModel("Katra Ball", AppConst.descriptionKatraBall, "/katra-ball.png",
-                Utils.GetTagsFromList(new string[]{"c#", "unity", "2d"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Gamejam}),
+                "https://mikadaux.itch.io/katra-ball"),
+
             new ProjectModel("Katra Heroes", AppConst.descriptionKatraHeroes, "/katra-heroes.png",
-                Utils.GetTagsFromList(new string[]{"c#", "unity", "online"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
+                ""),
+
             new ProjectModel("This site", AppConst.descriptionFolio, "",
-                Utils.GetTagsFromList(new string[]{"c#", "html", "css", "blazor"})),
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.HTML, TagEnum.CSS, TagEnum.dotnet, TagEnum.Blazor}),
+                "")
     };
 
+
+        _languages = new SkillModel[] {
+            Utils.SkillFromTag(AppConst.tags[TagEnum.Csharp]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.JS]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.HTML]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.CSS])
+    };
+
+
+        _softwares = new SkillModel[] {
+            Utils.SkillFromTag(AppConst.tags[TagEnum.Unity]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.dotnet]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.Blazor]),
+            new SkillModel("Git", AppConst.colorTint, 2),
+            new SkillModel("GitHub", AppConst.colorTint, 1),
+            new SkillModel("Notion", AppConst.colorTint, 1)
+    };
+
+
         _skills = new SkillModel[] {
-            Utils.SkillFromTag(AppConst.tags["c#"]),
-            Utils.SkillFromTag(AppConst.tags["js"]),
-            Utils.SkillFromTag(AppConst.tags["c++"]),
-            Utils.SkillFromTag(AppConst.tags["html"]),
-            Utils.SkillFromTag(AppConst.tags["css"]),
-            Utils.SkillFromTag(AppConst.tags["unity"])
+            Utils.SkillFromTag(AppConst.tags[TagEnum.UI]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.UX])
     };
 
         //BOTW

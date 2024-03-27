@@ -1,4 +1,6 @@
-﻿namespace Folio.Models {
+﻿using Folio.Client;
+
+namespace Folio.Models {
     public static class AppConst {
         //Colors
         public static string light = "#FFFBF5";
@@ -12,9 +14,6 @@
 
         public static string colorSuperTone = "#7F6265";
 
-        //Anim
-        public static string duration = "200ms";
-
         //Descriptions
         public static string descriptionBOTW =
             "Everything is good in this game (imo), from the gameplay to the art direction. " +
@@ -25,10 +24,13 @@
             "Just a super chill and beautiful game. " +
             "Also really liked The Pathless from Giant Squid.";
 
-        public static string descriptionAfterChill =
-            "A mix of IRl and VR escape game in collaboration with my university and an assurance compagny.";
         public static string descriptionGenesis =
             "Online TCG developed by Celsius Online.";
+        public static string descriptionAfterChill =
+            "A mix of IRl and VR escape game in collaboration with my university and an assurance compagny.";
+        public static string descriptionGrandsMigrateurs =
+            "A serious game made to advertise kids about ecology in collaboration with l’éducation nationale.";
+
 
         public static string descriptionVersusPunch =
             "Game jam game created in 2019 with some friends of mine.";
@@ -48,26 +50,27 @@
             "I graduated from Piktura (France) studying Game development and Game design." +
             "\nHere you can see some of the projects I've had the opportunity to work on, " +
             "and some of the personal-things I've been working on. " +
-            "\nSometimes I also make websites, like this one. If you have any questions please feel free to contact me.";
+            "\nIf you have any questions please feel free to contact me.";
 
-        //Skills
-        public static readonly Dictionary<string, TagModel> tags = new Dictionary<string, TagModel>() {
-            {"c#", new SkillModel("C#", color, 2) },
-            {"html", new SkillModel("HTML", color, 1) },
-            {"css", new SkillModel("CSS", color, 1) },
-            {"js", new SkillModel("JS", color, 1) },
-            {"c++", new SkillModel("C++", color, 1) },
-            {"unity", new SkillModel("Unity", colorTint, 2) },
-            {"blazor", new SkillModel("Blazor", colorTint, 2) },
-            {"dev", new TagModel("Dev", colorShade) },
-            {"ui", new TagModel("UI", colorShade) },
-            {"ux", new TagModel("UX", colorShade) },
-            {"lead", new TagModel("Lead", colorShade) },
-            {"online", new TagModel("Online", colorTone) },
-            {"multi", new TagModel("Multi", colorTone) },
-            {"3d", new TagModel("3D", colorTone) },
-            {"2d", new TagModel("2D", colorTone) },
-            {"vr", new TagModel("VR", colorTone) }
+        //Tags
+        public static readonly Dictionary<TagEnum, TagModel> tags = new Dictionary<TagEnum, TagModel>() {
+            {TagEnum.Csharp, new SkillModel("C#", color, 2) },
+            {TagEnum.HTML, new SkillModel("HTML", color, 1) },
+            {TagEnum.CSS, new SkillModel("CSS", color, 1) },
+            {TagEnum.JS, new SkillModel("JS", color, 1) },
+
+            {TagEnum.Unity, new SkillModel("Unity", colorTint, 2) },
+            {TagEnum.dotnet, new SkillModel(".NET", colorTint, 2) },
+            {TagEnum.Blazor, new SkillModel("Blazor", colorTint, 2) },
+
+            {TagEnum.UI, new SkillModel("UI", colorShade, 1) },
+            {TagEnum.UX, new SkillModel("UX", colorShade, 1) },
+            {TagEnum.Lead, new SkillModel("Lead", colorShade, 1) },
+
+            {TagEnum.Online, new TagModel("Online", colorTone) },
+            {TagEnum.Multi, new TagModel("Multi", colorTone) },
+            {TagEnum.VR, new TagModel("VR", colorTone) },
+            {TagEnum.Gamejam, new TagModel("Gamejam", colorTone) }
         };
 
         //Others

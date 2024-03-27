@@ -1,4 +1,5 @@
-﻿using Folio.Models;
+﻿using Folio.Client;
+using Folio.Models;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ public static class Utils {
         return new SkillModel(tag.name, tag.color, 0);
     }
 
-    public static TagModel[] GetTagsFromList(string[] ids) {
+    public static TagModel[] GetTagsFromList(TagEnum[] ids) {
         TagModel[] tags = new TagModel[ids.Length];
         for (int i = 0; i < ids.Length; i++) {
             tags[i] = AppConst.tags[ids[i]];

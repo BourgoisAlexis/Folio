@@ -3,10 +3,8 @@
 <div class="project-container animated">
     <div style="margin:inherit">
         <div class="project-frame stacker animated">
-            <div class="stacked bg-img animated"
-                 style="background-image:url(@Project.background);
-                background-color:@(GetBackgroundColor())"></div>
-            <span class="stacked animated">@Project.description</span>
+            <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
+            <span class="stacked animated" style="cursor:@(GetCursorType())" @onclick=OpenProjectPage>@Project.description</span>
         </div>
         <div style="display:flex; justify-content:center; align-items:center">
             <p>
@@ -24,7 +22,7 @@
                     @for (int x = 0; x < perLine; x++) {
                         int index = y + x;
                         if (index < Project.tags.Length) {
-                            <SkillView Tag="Project.tags[index]" Height="2" Width="3" DisplayAsTag=true></SkillView>
+                            <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
                         }
                     }
                 </div>
@@ -34,6 +32,7 @@
 </div>
 
 
+@inject IJSRuntime jsRuntime
 @code {
     [Parameter] public ProjectModel Project { get; set; }
 
@@ -43,7 +42,18 @@
     private float _widthVariation = 4f;
 
     private string GetBackgroundColor() {
-        return string.IsNullOrEmpty(Project.background) ? AppConst.colorSuperTone : "#00000000";
+        return string.IsNullOrEmpty(Project.backgroundURL) ? AppConst.colorSuperTone : "#00000000";
+    }
+
+    private string GetCursorType() {
+        return string.IsNullOrEmpty(Project.projectURL) ? "default" : "pointer";
+    }
+
+    private async void OpenProjectPage() {
+        if (string.IsNullOrEmpty(Project.projectURL))
+            return;
+
+        await jsRuntime.InvokeAsync<object>("open", Project.projectURL, "_blank");
     }
 }
 
@@ -67,7 +77,7 @@
             font-size: large;
             margin-top: @(Utils.FloatToREM(_margin));
             margin-bottom: 0;
-            width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
+            width: @(Utils.FloatToREM(_baseWidth - _margin * 4));
         }
 
         .project-container:hover {

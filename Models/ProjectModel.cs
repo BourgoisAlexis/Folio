@@ -2,20 +2,29 @@
     public struct ProjectModel {
         public string name;
         public string description;
+        public string backgroundURL;
         public TagModel[] tags;
-        public string background;
+        public string projectURL;
 
-        public ProjectModel(string name, string description, string background) {
+        public ProjectModel(string name, string description, string backgroundURL) {
             this.name = name;
             this.description = description;
-            this.background = background;
+            this.backgroundURL = backgroundURL;
         }
 
-        public ProjectModel(string name, string description, string background, TagModel[] tags) {
+        public ProjectModel(string name, string description, string backgroundURL, TagModel[] tags) {
             this.name = name;
             this.description = description;
-            this.background = background;
+            this.backgroundURL = backgroundURL;
             this.tags = tags;
+        }
+
+        public ProjectModel(string name, string description, string backgroundURL, TagModel[] tags, string projectURL) {
+            this.name = name;
+            this.description = description;
+            this.backgroundURL = backgroundURL;
+            this.tags = tags;
+            this.projectURL = projectURL;
         }
     }
 }

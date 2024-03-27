@@ -1,12 +1,12 @@
 ﻿@using Folio.Models;
 
 <div>
-    <div class="d-flex flex-column justify-content-center align-content-center">
-        <h2>
-            @if (!string.IsNullOrEmpty(Title)) {
+    <div class="d-flex flex-column">
+        @if (!string.IsNullOrEmpty(Title)) {
+            <h2>
                 @Title
-            }
-        </h2>
+            </h2>
+        }
 
         @if (!string.IsNullOrEmpty(Text)) {
             <div class="d-flex justify-content-center">
@@ -32,10 +32,12 @@
         }
 
         @if (Skills != null) {
-            <div class="d-flex flex-row justify-content-center">
-                @for (int i = 0; i < Skills.Length; i++) {
-                    <SkillView Tag="Skills[i]" Height="2" Width="5"></SkillView>
-                }
+            <div class="d-flex justify-content-center">
+                <div class="d-flex w-50 justify-content-center">
+                    @for (int i = 0; i < Skills.Length; i++) {
+                        <SkillView Tag="Skills[i]" Height="2" Width="5"></SkillView>
+                    }
+                </div>
             </div>
         }
     </div>

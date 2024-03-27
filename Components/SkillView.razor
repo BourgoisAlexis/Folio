@@ -3,8 +3,8 @@
 @using System.Globalization;
 
 <div class="skill-container stacker"
-     style="height:@($"{Height}rem");
-        width:@($"{Width}rem");
+     style="height:@(Utils.FloatToREM(Height));
+        width:@(Utils.FloatToREM(Width));
         border-radius: @(GetBorderRadius());
         background-color: @(GetColor());
         --fill-width: @(GetFillWidth());">
@@ -21,14 +21,14 @@
     [Parameter] public float Width { get; set; }
     [Parameter] public bool DisplayAsTag { get; set; }
 
-    private float _max = 3;
+    private float _seniorLevel = 3;
 
     private SkillModel Skill => Utils.SkillFromTag(Tag);
     private bool ShowLevel => Skill.level > 0;
     #endregion
 
     private string GetFillWidth() {
-        int value = (int)Math.Ceiling((float)Skill.level / _max * 100);
+        int value = (int)Math.Ceiling((float)Skill.level / _seniorLevel * 100);
         return $"{((ShowLevel && !DisplayAsTag) ? value : 0)}%";
     }
 
