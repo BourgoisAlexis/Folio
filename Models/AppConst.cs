@@ -48,9 +48,11 @@ namespace Folio.Models {
         public static string aboutMe =
             "Hi! I'm Alexis, a game and more specificaly Unity programmer from France. " +
             "I graduated from Piktura (France) studying Game development and Game design." +
-            "\nHere you can see some of the projects I've had the opportunity to work on, " +
+            "\n\nI'm (obviously) passionate about video games but also really into music and music composition (even though i'm not really good at it)" +
+            "\nEven if I mainly code for games I am also currently learning web dev during my spare time." +
+            "\n\nHere you can see some of the projects I've had the opportunity to work on, " +
             "and some of the personal-things I've been working on. " +
-            "\nIf you have any questions please feel free to contact me.";
+            "\n\nIf you have any questions please feel free to reach to me.";
 
         //Tags
         public static readonly Dictionary<TagEnum, TagModel> tags = new Dictionary<TagEnum, TagModel>() {

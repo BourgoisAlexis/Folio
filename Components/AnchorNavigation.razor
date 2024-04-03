@@ -1,0 +1,52 @@
+﻿<script>
+    function BlazorScrollToId(id) {
+        const element = document.getElementById(id);
+        if (element instanceof HTMLElement) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest"
+            });
+        }
+    }
+</script>
+
+
+@inject IJSRuntime jsruntime
+@inject NavigationManager navigationmanager
+@implements IDisposable
+@code {
+    protected override void OnInitialized() {
+        navigationmanager.LocationChanged += OnLocationChanged;
+        base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        await ScrollToFragment();
+    }
+
+    public void Dispose() {
+        navigationmanager.LocationChanged -= OnLocationChanged;
+    }
+
+    private async void OnLocationChanged(object sender, LocationChangedEventArgs e) {
+        await ScrollToFragment();
+    }
+
+
+    private async Task ScrollToFragment() {
+        var uri = new Uri(navigationmanager.Uri, UriKind.Absolute);
+        var fragment = uri.Fragment;
+        if (fragment.StartsWith('#')) {
+            var elementId = fragment.Substring(1);
+            var index = elementId.IndexOf(":~:", StringComparison.Ordinal);
+            if (index > 0) {
+                elementId = elementId.Substring(0, index);
+            }
+
+            if (!string.IsNullOrEmpty(elementId)) {
+                await jsruntime.InvokeVoidAsync("BlazorScrollToId", elementId);
+            }
+        }
+    }
+}

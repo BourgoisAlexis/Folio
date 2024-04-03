@@ -1,6 +1,6 @@
 ﻿@using Folio.Models;
 
-<div>
+<div id="@ID" class="section">
     <div class="d-flex flex-column">
         @if (!string.IsNullOrEmpty(Title)) {
             <h2>
@@ -45,8 +45,15 @@
 
 
 @code {
+    [Parameter] public string ID { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public string Text { get; set; }
     [Parameter] public ProjectModel[] Projects { get; set; }
     [Parameter] public SkillModel[] Skills { get; set; }
 }
+
+<style>
+    .section{
+        scroll-margin-top: 4rem;
+    }
+</style>

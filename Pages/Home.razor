@@ -10,25 +10,39 @@
 </h1>
 
 <SeparatorView Vertical=true></SeparatorView>
-<SectionView Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
+<SectionView ID="about" Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
 <br />
 <SectionView Title=@($"My favorite games") Projects="_favoriteGames"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
-<SectionView Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
+<SectionView ID="pro" Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
-<SectionView Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
+<SectionView ID="perso" Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
-<SectionView Title=@($"Resume") Skills="_languages"></SectionView>
+<SectionView ID="skills" Title=@($"Skills") Skills="_languages"></SectionView>
 <br />
 <SectionView Skills="_softwares"></SectionView>
 <br />
 <SectionView Skills="_skills"></SectionView>
 <SeparatorView Vertical=false></SeparatorView>
 
-<footer style="text-align:center">
-    Contacts
+@*opti tout ça*@
+<footer class="d-flex flex-column" style="text-align:center">
+    <SectionView ID="contacts" Title="Contacts & Links"></SectionView>
+    <div style="color:@(AppConst.colorTint)">
+        <i style="color:inherit" class="bi-envelope-at"></i>
+        <a style="color:inherit" href="mailto:bourgoisalexis@gmail.com" target="_blank">bourgoisalexis@gmail.com</a>
+    </div>
+    <div style="color:@(AppConst.colorTint)">
+        <i style="color:inherit" class="bi-github"></i>
+        <a style="color:inherit" href="https://github.com/BourgoisAlexis" target="_blank">Github</a>
+    </div>
+    <div style="color:@(AppConst.colorTint)">
+        <i style="color:inherit" class="bi-linkedin"></i>
+        <a style="color:inherit" href="https://www.linkedin.com/in/alexis-bourgois/" target="_blank">Linkedin</a>
+    </div>
 </footer>
 
+<AnchorNavigation></AnchorNavigation>
 
 
 @code {
@@ -73,7 +87,7 @@
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
                 ""),
 
-            new ProjectModel("This site", AppConst.descriptionFolio, "",
+            new ProjectModel("This website", AppConst.descriptionFolio, "",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.HTML, TagEnum.CSS, TagEnum.dotnet, TagEnum.Blazor}),
                 "")
     };
@@ -101,12 +115,6 @@
             Utils.SkillFromTag(AppConst.tags[TagEnum.UI]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.UX])
     };
-
-        //BOTW
-        //FF12
-        //Abzu
-        //Mario Odyssey
-        //Portal 2
 
         _favoriteGames = new ProjectModel[] {
             new ProjectModel("Zelda: Breath of the wild", AppConst.descriptionBOTW, "/botw.png"),
