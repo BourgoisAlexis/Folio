@@ -17,7 +17,7 @@
         }
 
         @if (Projects != null) {
-            int perLine = 4;
+            int perLine = AppConst.mobile ? 2 : 4;
 
             for (int y = 0; y < Projects.Length; y += perLine) {
                 <div class="d-flex flex-row justify-content-center">
@@ -32,28 +32,40 @@
         }
 
         @if (Skills != null) {
-            <div class="d-flex justify-content-center">
-                <div class="d-flex w-50 justify-content-center">
-                    @for (int i = 0; i < Skills.Length; i++) {
-                        <SkillView Tag="Skills[i]" Height="2" Width="5"></SkillView>
+            int perLine = AppConst.mobile ? 4 : 10;
+
+            for (int y = 0; y < Skills.Length; y += perLine) {
+                <div class="d-flex flex-row justify-content-center">
+                    @for (int x = 0; x < perLine; x++) {
+                        int index = y + x;
+                        if (index < Skills.Length) {
+                            <SkillView Tag="Skills[index]" Height="2" Width="5"></SkillView>
+                        }
                     }
                 </div>
-            </div>
+            }
         }
     </div>
 </div>
 
 
+@inject IJSRuntime jsRuntime
 @code {
     [Parameter] public string ID { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public string Text { get; set; }
     [Parameter] public ProjectModel[] Projects { get; set; }
     [Parameter] public SkillModel[] Skills { get; set; }
+
+    protected override Task OnInitializedAsync() {
+        AppConst.OnGetSize += () => StateHasChanged();
+
+        return base.OnInitializedAsync();
+    }
 }
 
 <style>
-    .section{
+    .section {
         scroll-margin-top: 4rem;
     }
 </style>

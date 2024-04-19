@@ -1,6 +1,6 @@
 ﻿<script>
     function BlazorScrollToId(id) {
-        const element = document.getElementById(id);
+        let element = document.getElementById(id);
         if (element instanceof HTMLElement) {
             element.scrollIntoView({
                 behavior: "smooth",

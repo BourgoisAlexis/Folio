@@ -12,13 +12,6 @@
             this.backgroundURL = backgroundURL;
         }
 
-        public ProjectModel(string name, string description, string backgroundURL, TagModel[] tags) {
-            this.name = name;
-            this.description = description;
-            this.backgroundURL = backgroundURL;
-            this.tags = tags;
-        }
-
         public ProjectModel(string name, string description, string backgroundURL, TagModel[] tags, string projectURL) {
             this.name = name;
             this.description = description;

@@ -1,18 +1,20 @@
 ﻿@using Folio.Models;
 
-<nav class="navbar navbar-expand-lg h-100 w-100 justify-content-center" style="background-color:@(AppConst.colorTint)">
-    <ul class="navbar-nav nav-fill w-75">
+<div class="navbar sticky-top">
+    <div class="navbar-nav">
         @for (int i = 0; i < _infos.Length; i++) {
             int index = i;
-            <li class="nav-item">
+            <div class="nav-item m-1">
                 <NavLink class="nav-link animated" href="@_infos[index].id">
-                    <i class=@_infos[index].icon style="font-size:inherit; color:inherit"></i>
-                    @_infos[index].name
+                    <i class="m-1 @_infos[index].icon" style="font-size:inherit; color:inherit"></i>
+                    @if (!AppConst.mobile) {
+                        @_infos[index].name
+                    }
                 </NavLink>
-            </li>
+            </div>
         }
-    </ul>
-</nav>
+    </div>
+</div>
 
 
 @code {
@@ -30,25 +32,44 @@
             new PageModel("#contacts", "Contacts", "bi-envelope-at"),
     };
 
+        AppConst.OnGetSize += () => StateHasChanged();
+
         return base.OnInitializedAsync();
     }
 }
 
 
 <style>
-    .navbar{
-
+    .navbar {
+        width: 100%;
+        height: 3rem;
+        background-color: @AppConst.colorTint;
+        justify-content: center;
     }
 
-    .navbar-nav .nav-item .nav-link {
-        font-size: 1rem;
-        color: @AppConst.dark;
-        transition-property: color;
-    }
+        .navbar .navbar-nav {
+            height: 100%;
+            width: 75%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-    .navbar-nav .nav-item .nav-link:hover {
-        color: @AppConst.light;
-        transition-property: color;
-    }
+            .navbar .navbar-nav .nav-item {
+                flex-grow: 1;
+            }
+
+                .navbar .navbar-nav .nav-item .nav-link {
+                    font-size: 1rem;
+                    color: @AppConst.dark;
+                    transition-property: color;
+                }
+
+                    .navbar .navbar-nav .nav-item .nav-link:hover {
+                        color: @AppConst.light;
+                        transition-property: color;
+                    }
 
 </style>

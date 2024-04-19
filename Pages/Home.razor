@@ -13,6 +13,8 @@
 <SectionView ID="about" Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
 <br />
 <SectionView Title=@($"My favorite games") Projects="_favoriteGames"></SectionView>
+<br />
+<SectionView Title=@($"Some of the music artists I like") Projects="_favoriteArtists"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
 <SectionView ID="pro" Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
 <SeparatorView Vertical=true></SeparatorView>
@@ -28,15 +30,15 @@
 @*opti tout ça*@
 <footer class="d-flex flex-column" style="text-align:center">
     <SectionView ID="contacts" Title="Contacts & Links"></SectionView>
-    <div style="color:@(AppConst.colorTint)">
+    <div class="link animated">
         <i style="color:inherit" class="bi-envelope-at"></i>
         <a style="color:inherit" href="mailto:bourgoisalexis@gmail.com" target="_blank">bourgoisalexis@gmail.com</a>
     </div>
-    <div style="color:@(AppConst.colorTint)">
+    <div class="link animated">
         <i style="color:inherit" class="bi-github"></i>
         <a style="color:inherit" href="https://github.com/BourgoisAlexis" target="_blank">Github</a>
     </div>
-    <div style="color:@(AppConst.colorTint)">
+    <div class="link animated">
         <i style="color:inherit" class="bi-linkedin"></i>
         <a style="color:inherit" href="https://www.linkedin.com/in/alexis-bourgois/" target="_blank">Linkedin</a>
     </div>
@@ -49,11 +51,12 @@
     private ProjectModel[] _professionnalProjects = new ProjectModel[] { };
     private ProjectModel[] _personnalProjects = new ProjectModel[] { };
     private ProjectModel[] _favoriteGames = new ProjectModel[] { };
+    private ProjectModel[] _favoriteArtists = new ProjectModel[] { };
     private SkillModel[] _languages = new SkillModel[] { };
     private SkillModel[] _softwares = new SkillModel[] { };
     private SkillModel[] _skills = new SkillModel[] { };
 
-    protected override Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync() {
 
         _professionnalProjects = new ProjectModel[] {
             new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis, "/genesis.png",
@@ -122,6 +125,29 @@
             new ProjectModel("Abzu", AppConst.descriptionAbzu, "/abzu.png")
     };
 
-        return base.OnInitializedAsync();
+        _favoriteArtists = new ProjectModel[] {
+            new ProjectModel("Nujabes", "Listen on Spotify",
+                "https://i.scdn.co/image/ab676161000051742dd5a47714902a1db1810456", null,
+                "https://open.spotify.com/intl-fr/artist/3Rq3YOF9YG9YfCWD4D56RZ?si=221a8387f0014a5e"),
+            new ProjectModel("68+1", "Listen on Spotify",
+                "https://i.scdn.co/image/ab6761610000f178e192a738320165339442b16f", null,
+                "https://open.spotify.com/intl-fr/artist/3YrAMtgGeFZCc4JCQI9mfr?si=25TSh8UES-6AzM59jYsOjw"),
+            new ProjectModel("Slow Pulp", "Listen on Spotify",
+                "https://i.scdn.co/image/ab6761610000f178af8de1de25f395082edc2251", null,
+                "https://open.spotify.com/intl-fr/artist/2JFTRDi5v7JtqoouVe1z5D?si=pBJWw01GRhC65bYFaPC_LQ"),
+    };
     }
 }
+
+
+<style>
+    footer .link {
+        color: @AppConst.colorTint;
+        transition-property: color;
+    }
+
+        footer .link:hover {
+            color: @AppConst.light;
+            transition-property: color;
+        }
+</style>

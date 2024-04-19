@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 
@@ -28,6 +26,15 @@
         <a class="dismiss">🗙</a>
     </div>-->
     <script src="_framework/blazor.webassembly.js"></script>
+
+    <script type="text/javascript">
+        window.getDimensions = function () {
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+        };
+    </script>
 </body>
 
 </html>

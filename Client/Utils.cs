@@ -1,12 +1,12 @@
 ﻿using Folio.Client;
 using Folio.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Web;
 
 public static class Utils {
-
     public static string ConvertFloatToString(float value) {
         return value.ToString(CultureInfo.InvariantCulture);
     }

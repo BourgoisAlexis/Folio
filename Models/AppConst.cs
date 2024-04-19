@@ -1,4 +1,5 @@
 ﻿using Folio.Client;
+using Microsoft.AspNetCore.Components;
 
 namespace Folio.Models {
     public static class AppConst {
@@ -48,8 +49,9 @@ namespace Folio.Models {
         public static string aboutMe =
             "Hi! I'm Alexis, a game and more specificaly Unity programmer from France. " +
             "I graduated from Piktura (France) studying Game development and Game design." +
-            "\n\nI'm (obviously) passionate about video games but also really into music and music composition (even though i'm not really good at it)" +
-            "\nEven if I mainly code for games I am also currently learning web dev during my spare time." +
+            "\n\nI'm (obviously) passionate about video games " +
+            "and also really into music and music composition (even though i'm not really good at it)" +
+            "\nI mainly code for games but I am also currently learning web dev during my spare time." +
             "\n\nHere you can see some of the projects I've had the opportunity to work on, " +
             "and some of the personal-things I've been working on. " +
             "\n\nIf you have any questions please feel free to reach to me.";
@@ -77,5 +79,8 @@ namespace Folio.Models {
 
         //Others
         public static string placeHolder = "<Place Holder>";
+        public static bool mobile = false;
+
+        public static Action OnGetSize;
     }
 }
