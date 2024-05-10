@@ -7,6 +7,7 @@
         CSS,
         JS,
         TS,
+        SPARQL,
 
         Unity,
         dotnet,

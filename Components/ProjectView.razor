@@ -67,7 +67,7 @@
         align-items: center;
         margin: @(Utils.FloatToREM(_margin));
         border-style: solid;
-        border-color: @(AppConst.colorSuperTone);
+        border-color: @(AppConst.colorTint);
         border-radius: 1.5rem;
         border-width: @(Utils.FloatToREM(_borderWidth));
         pointer-events: none;
@@ -127,7 +127,7 @@
     }
 
     .frame-separator {
-        height: @($"{Utils.ConvertFloatToString(_borderWidth)}rem");
+        height: @($"{Utils.ConvertFloatToString(_borderWidth / 2)}rem");
         width: 100%;
         margin-top: @(Utils.FloatToREM(_margin));
         margin-bottom: @(Utils.FloatToREM(_margin));

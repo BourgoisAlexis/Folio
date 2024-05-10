@@ -44,6 +44,8 @@ namespace Folio.Models {
             "Used Player.IO for the online part.";
         public static string descriptionFolio =
             "I wanted to experiment a bit with HTML and CSS (and web dev in general).";
+        public static string descriptionCountries =
+            "Game created is solo in about 2 weeks using Unity, PlayerIO and Wikidata.";
 
         //About me
         public static string aboutMe =
@@ -62,6 +64,7 @@ namespace Folio.Models {
             {TagEnum.HTML, new SkillModel("HTML", color, 1) },
             {TagEnum.CSS, new SkillModel("CSS", color, 1) },
             {TagEnum.JS, new SkillModel("JS", color, 1) },
+            {TagEnum.SPARQL, new SkillModel("SPARQL", color, 1) },
 
             {TagEnum.Unity, new SkillModel("Unity", colorTint, 2) },
             {TagEnum.dotnet, new SkillModel(".NET", colorTint, 2) },
