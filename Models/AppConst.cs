@@ -49,7 +49,7 @@ namespace Folio.Models {
 
         //About me
         public static string aboutMe =
-            "Hi! I'm Alexis, a game and more specificaly Unity programmer from France. " +
+            "Hi ! I'm Alexis, a game and more specificaly Unity programmer from France. " +
             "I graduated from Piktura (France) studying Game development and Game design." +
             "\n\nI'm (obviously) passionate about video games " +
             "and also really into music and music composition (even though i'm not really good at it)" +
@@ -67,7 +67,7 @@ namespace Folio.Models {
             {TagEnum.SPARQL, new SkillModel("SPARQL", color, 1) },
 
             {TagEnum.Unity, new SkillModel("Unity", colorTint, 2) },
-            {TagEnum.dotnet, new SkillModel(".NET", colorTint, 2) },
+            {TagEnum.dotnet, new SkillModel(".NET", colorTint, 1) },
             {TagEnum.Blazor, new SkillModel("Blazor", colorTint, 2) },
 
             {TagEnum.UI, new SkillModel("UI", colorShade, 1) },

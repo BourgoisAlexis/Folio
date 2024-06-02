@@ -1,35 +1,69 @@
 ﻿@using Folio.Models;
 
-<div class="project-container animated">
-    <div style="margin:inherit">
-        <div class="project-frame stacker animated">
-            <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
-            <span class="stacked animated" style="cursor:@(GetCursorType())" @onclick=OpenProjectPage>@Project.description</span>
-        </div>
-        <div style="display:flex; justify-content:center; align-items:center">
-            <p>
-                @Project.name
-            </p>
-        </div>
-        @if (Project.tags != null) {
+@if (!AppConst.mobile) {
+    <div class="project-container @(_hovered ? "project-container-hover" : null) animated" @onmouseenter=MouseEnter @onmouseleave=MouseExit @onclick=MouseClick>
+        <div style="margin:inherit">
+            <div class="project-frame stacker animated">
+                <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
+                <span class="stacked animated" style="cursor:@(GetCursorType())">@Project.description</span>
+            </div>
+            <div style="display:flex; justify-content:center; align-items:center">
+                <p>
+                    @Project.name
+                </p>
+            </div>
+            @if (Project.tags != null) {
 
-            <div class="frame-separator"></div>
+                <div class="frame-separator"></div>
 
-            int perLine = 3;
+                int perLine = 3;
 
-            for (int y = 0; y < Project.tags.Length; y += perLine) {
-                <div class="w-100">
-                    @for (int x = 0; x < perLine; x++) {
-                        int index = y + x;
-                        if (index < Project.tags.Length) {
-                            <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
+                for (int y = 0; y < Project.tags.Length; y += perLine) {
+                    <div class="w-100">
+                        @for (int x = 0; x < perLine; x++) {
+                            int index = y + x;
+                            if (index < Project.tags.Length) {
+                                <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
+                            }
                         }
-                    }
-                </div>
+                    </div>
+                }
             }
-        }
+        </div>
     </div>
-</div>
+}
+else {
+    <div class="project-container @(_hovered ? "project-container-hover" : null) animated" @onclick=MouseClick>
+        <div style="margin:inherit">
+            <div class="project-frame stacker animated">
+                <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
+                <span class="stacked animated" style="cursor:@(GetCursorType())">@Project.description</span>
+            </div>
+            <div style="display:flex; justify-content:center; align-items:center">
+                <p>
+                    @Project.name
+                </p>
+            </div>
+            @if (Project.tags != null) {
+
+                <div class="frame-separator"></div>
+
+                int perLine = 3;
+
+                for (int y = 0; y < Project.tags.Length; y += perLine) {
+                    <div class="w-100">
+                        @for (int x = 0; x < perLine; x++) {
+                            int index = y + x;
+                            if (index < Project.tags.Length) {
+                                <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
 
 
 @inject IJSRuntime jsRuntime
@@ -40,6 +74,8 @@
     private float _baseWidth = 14f;
     private float _margin = 0.5f;
     private float _widthVariation = 4f;
+
+    private bool _hovered = false;
 
     private string GetBackgroundColor() {
         return string.IsNullOrEmpty(Project.backgroundURL) ? AppConst.colorSuperTone : "#00000000";
@@ -54,6 +90,24 @@
             return;
 
         await jsRuntime.InvokeAsync<object>("open", Project.projectURL, "_blank");
+    }
+
+    private void MouseEnter() {
+        _hovered = true;
+    }
+
+    private void MouseExit() {
+        _hovered = false;
+    }
+
+    private void MouseClick() {
+        if (_hovered)
+            OpenProjectPage();
+
+        if (!AppConst.mobile)
+            return;
+
+        _hovered = !_hovered;
     }
 }
 
@@ -71,6 +125,7 @@
         border-radius: 1.5rem;
         border-width: @(Utils.FloatToREM(_borderWidth));
         pointer-events: none;
+        transition-property: width;
     }
 
         .project-container p {
@@ -80,25 +135,25 @@
             width: @(Utils.FloatToREM(_baseWidth - _margin * 4));
         }
 
-        .project-container:hover {
-            width: @(Utils.FloatToREM(_baseWidth + _widthVariation));
-            transition-property: width;
+    .project-container-hover {
+        width: @(Utils.FloatToREM(_baseWidth + _widthVariation));
+        transition-property: width;
+    }
+
+        .project-container-hover .project-frame {
+            width: @(Utils.FloatToREM(_baseWidth + _widthVariation - _margin * 2));
         }
 
-            .project-container:hover .project-frame {
-                width: @(Utils.FloatToREM(_baseWidth + _widthVariation - _margin * 2));
+            .project-container-hover .project-frame .bg-img {
+                filter: blur(5px) brightness(0.5);
+                transition-property: filter;
             }
 
-                .project-container:hover .project-frame .bg-img {
-                    filter: blur(5px) brightness(0.5);
-                    transition-property: filter;
-                }
-
-                .project-container:hover .project-frame span {
-                    color: @AppConst.light;
-                    left: @(Utils.FloatToREM(_widthVariation / 2));
-                    transition-property: color, left;
-                }
+            .project-container-hover .project-frame span {
+                color: @AppConst.light;
+                left: @(Utils.FloatToREM(_widthVariation / 2));
+                transition-property: color, left;
+            }
 
     .project-frame {
         width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
@@ -113,7 +168,7 @@
             color: transparent;
             z-index: 10;
             width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
-            font-size-adjust:inherit;
+            font-size-adjust: inherit;
             left: 0rem;
             transition-property: color, left;
             font-weight: bold;

@@ -7,7 +7,8 @@
         width:@(Utils.FloatToREM(Width));
         border-radius: @(GetBorderRadius());
         background-color: @(GetColor());
-        --fill-width: @(GetFillWidth());">
+        --fill-width: @(GetFillWidth());
+        --basic-fill-width: @(AppConst.mobile ? GetFillWidth() : "0%");">
 
     <div class="stacked skill-fill animated"></div>
     <span class="stacked" style="font-size:@(GetFontSize())">@(Tag.name)</span>
@@ -48,7 +49,8 @@
 
 <style>
     :root {
-        --fill-width: @(GetFillWidth());
+        --fill-width: 50%;
+        --basic-fill-width: 0%;
     }
 
     .skill-container {
@@ -63,7 +65,7 @@
         }
 
     .skill-fill {
-        width: 0% !important;
+        width: var(--basic-fill-width) !important;
         background-color: @AppConst.color;
         transition-property: width;
     }

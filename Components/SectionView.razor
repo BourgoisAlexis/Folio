@@ -17,7 +17,7 @@
         }
 
         @if (Projects != null) {
-            int perLine = AppConst.mobile ? 2 : 4;
+            int perLine = AppConst.mobile ? 1 : 4;
 
             for (int y = 0; y < Projects.Length; y += perLine) {
                 <div class="d-flex flex-row justify-content-center">
@@ -32,7 +32,7 @@
         }
 
         @if (Skills != null) {
-            int perLine = AppConst.mobile ? 4 : 10;
+            int perLine = AppConst.mobile ? 3 : 10;
 
             for (int y = 0; y < Skills.Length; y += perLine) {
                 <div class="d-flex flex-row justify-content-center">

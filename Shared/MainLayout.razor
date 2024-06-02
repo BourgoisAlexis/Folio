@@ -19,7 +19,7 @@
         AppConst.OnGetSize += () => StateHasChanged();
 
         WindowDimensions dimensions = await service.GetDimensions();
-        AppConst.mobile = dimensions.Width <= 700;
+        AppConst.mobile = (float)dimensions.Width / (float)dimensions.Height < 0.8f;
 
         AppConst.OnGetSize.Invoke();
     }
@@ -38,7 +38,7 @@
     h2 {
         font-size: 2rem;
         text-align: center;
-        margin: 0.5rem 0 0.5rem 0;
+        margin: 1rem 0 0.7rem 0;
     }
 
     .page {
