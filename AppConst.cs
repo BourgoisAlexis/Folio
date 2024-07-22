@@ -1,5 +1,4 @@
 ﻿using Folio.Client;
-using Microsoft.AspNetCore.Components;
 
 namespace Folio.Models {
     public static class AppConst {
@@ -14,6 +13,8 @@ namespace Folio.Models {
         public static string colorTone = "#CD5f69";
 
         public static string colorSuperTone = "#7F6265";
+
+        public static string narrowBorder = "2px";
 
         //Descriptions
         public static string descriptionBOTW =
@@ -52,11 +53,11 @@ namespace Folio.Models {
             "Hi ! I'm Alexis, a game and more specificaly Unity programmer from France. " +
             "I graduated from Piktura (France) studying Game development and Game design." +
             "\n\nI'm (obviously) passionate about video games " +
-            "and also really into music and music composition (even though i'm not really good at it)" +
+            "and also really into music and music composition (even though i'm not really good at any of it)" +
             "\nI mainly code for games but I am also currently learning web dev during my spare time." +
             "\n\nHere you can see some of the projects I've had the opportunity to work on, " +
             "and some of the personal-things I've been working on. " +
-            "\n\nIf you have any questions please feel free to reach to me.";
+            "\n\nIf you have any questions please feel free to reach to me. ";
 
         //Tags
         public static readonly Dictionary<TagEnum, TagModel> tags = new Dictionary<TagEnum, TagModel>() {
@@ -68,7 +69,7 @@ namespace Folio.Models {
 
             {TagEnum.Unity, new SkillModel("Unity", colorTint, 2) },
             {TagEnum.dotnet, new SkillModel(".NET", colorTint, 1) },
-            {TagEnum.Blazor, new SkillModel("Blazor", colorTint, 2) },
+            {TagEnum.Razor, new SkillModel("Razor", colorTint, 1) },
 
             {TagEnum.UI, new SkillModel("UI", colorShade, 1) },
             {TagEnum.UX, new SkillModel("UX", colorShade, 1) },

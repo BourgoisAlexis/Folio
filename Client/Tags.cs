@@ -11,7 +11,7 @@
 
         Unity,
         dotnet,
-        Blazor,
+        Razor,
 
         UI,
         UX,
