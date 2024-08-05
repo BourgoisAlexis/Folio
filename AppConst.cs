@@ -11,10 +11,10 @@ namespace Folio.Models {
         public static string colorTint = "#FD7884";
         public static string colorShade = "#C93744";
         public static string colorTone = "#CD5f69";
-
         public static string colorSuperTone = "#7F6265";
 
         public static string narrowBorder = "2px";
+        public static int seniorLevel = 4;
 
         //Descriptions
         public static string descriptionBOTW =
@@ -40,8 +40,10 @@ namespace Folio.Models {
             "Game created during my master degree as the final project to present in front of pros.";
         public static string descriptionKatraBall =
             "Just a small side project to play a bit with physics.";
+        public static string descriptionTurboSuperJump =
+            "A quick side project of mobile game created in 2 days.";
         public static string descriptionKatraHeroes =
-            "Mobil strategy game with a TCG inspired twist. " +
+            "Mobile strategy game with a TCG inspired twist. " +
             "Used Player.IO for the online part.";
         public static string descriptionFolio =
             "I wanted to experiment a bit with HTML and CSS (and web dev in general).";
@@ -61,14 +63,15 @@ namespace Folio.Models {
 
         //Tags
         public static readonly Dictionary<TagEnum, TagModel> tags = new Dictionary<TagEnum, TagModel>() {
-            {TagEnum.Csharp, new SkillModel("C#", color, 2) },
+            {TagEnum.Csharp, new SkillModel("C#", color, 3) },
+            {TagEnum.Python, new SkillModel("Python", color, 2) },
             {TagEnum.HTML, new SkillModel("HTML", color, 1) },
-            {TagEnum.CSS, new SkillModel("CSS", color, 1) },
+            {TagEnum.CSS, new SkillModel("CSS", color, 2) },
             {TagEnum.JS, new SkillModel("JS", color, 1) },
             {TagEnum.SPARQL, new SkillModel("SPARQL", color, 1) },
 
-            {TagEnum.Unity, new SkillModel("Unity", colorTint, 2) },
-            {TagEnum.dotnet, new SkillModel(".NET", colorTint, 1) },
+            {TagEnum.Unity, new SkillModel("Unity", colorTint, 3) },
+            {TagEnum.dotnet, new SkillModel(".NET", colorTint, 2) },
             {TagEnum.Razor, new SkillModel("Razor", colorTint, 1) },
 
             {TagEnum.UI, new SkillModel("UI", colorShade, 1) },
@@ -78,6 +81,7 @@ namespace Folio.Models {
             {TagEnum.Online, new TagModel("Online", colorTone) },
             {TagEnum.Multi, new TagModel("Multi", colorTone) },
             {TagEnum.VR, new TagModel("VR", colorTone) },
+            {TagEnum.Mobile, new TagModel("Mobile", colorTone) },
             {TagEnum.Gamejam, new TagModel("Gamejam", colorTone) }
         };
 

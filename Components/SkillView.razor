@@ -22,14 +22,12 @@
     [Parameter] public float Width { get; set; }
     [Parameter] public bool DisplayAsTag { get; set; }
 
-    private float _seniorLevel = 3;
-
     private SkillModel Skill => Utils.SkillFromTag(Tag);
     private bool ShowLevel => Skill.level > 0;
     #endregion
 
     private string GetFillWidth() {
-        int value = (int)Math.Ceiling((float)Skill.level / _seniorLevel * 100);
+        int value = (int)Math.Ceiling((float)Skill.level / AppConst.seniorLevel * 100);
         return $"{((ShowLevel && !DisplayAsTag) ? value : 0)}%";
     }
 

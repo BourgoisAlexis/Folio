@@ -1,5 +1,5 @@
 ﻿namespace Folio.Models {
-    public struct ProjectModel {
+    public class ProjectModel {
         public string name;
         public string description;
         public string backgroundURL;

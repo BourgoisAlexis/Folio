@@ -31,16 +31,20 @@
 <footer class="d-flex flex-column" style="text-align:center">
     <SectionView ID="contacts" Title="Contacts & Links"></SectionView>
     <div class="link animated">
-        <i style="color:inherit" class="bi-envelope-at"></i>
+        <i style="margin-right:0.5rem; color:inherit" class="bi-envelope-at"></i>
         <a style="color:inherit" href="mailto:bourgoisalexis@gmail.com" target="_blank">bourgoisalexis@gmail.com</a>
     </div>
     <div class="link animated">
-        <i style="color:inherit" class="bi-github"></i>
+        <i style="margin-right:0.5rem; color:inherit" class="bi-github"></i>
         <a style="color:inherit" href="https://github.com/BourgoisAlexis" target="_blank">Github</a>
     </div>
     <div class="link animated">
-        <i style="color:inherit" class="bi-linkedin"></i>
+        <i style="margin-right:0.5rem; color:inherit" class="bi-linkedin"></i>
         <a style="color:inherit" href="https://www.linkedin.com/in/alexis-bourgois/" target="_blank">Linkedin</a>
+    </div>
+    <div class="link animated">
+        <i style="margin-right:0.5rem; color:inherit" class="bi-controller"></i>
+        <a style="color:inherit" href="https://mikadaux.itch.io/" target="_blank">Itch.io</a>
     </div>
 </footer>
 
@@ -74,13 +78,17 @@
 
 
         _personnalProjects = new ProjectModel[] {
-            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch, "/versus-punch.png",
-                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
-                "https://katra-production.itch.io/versus-punch"),
-
             new ProjectModel("Countries game", AppConst.descriptionCountries, "/countries.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.SPARQL, TagEnum.Unity, TagEnum.Multi, TagEnum.Online}),
                 "https://mikadaux.itch.io/countriesgame"),
+
+            new ProjectModel("Turbo Super Jump 2", AppConst.descriptionTurboSuperJump, "/turbo-super-jump.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Mobile}),
+                "https://mikadaux.itch.io/turbo-super-jump-2"),
+
+            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch, "/versus-punch.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
+                "https://katra-production.itch.io/versus-punch"),
 
             new ProjectModel("Femora", AppConst.descriptionFemora, "/femora.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.UI, TagEnum.UX}),
@@ -102,6 +110,7 @@
 
         _languages = new SkillModel[] {
             Utils.SkillFromTag(AppConst.tags[TagEnum.Csharp]),
+            Utils.SkillFromTag(AppConst.tags[TagEnum.Python]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.JS]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.HTML]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.CSS])
@@ -112,9 +121,8 @@
             Utils.SkillFromTag(AppConst.tags[TagEnum.Unity]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.dotnet]),
             Utils.SkillFromTag(AppConst.tags[TagEnum.Razor]),
-            new SkillModel("Git", AppConst.colorTint, 2),
-            new SkillModel("GitHub", AppConst.colorTint, 1),
-            new SkillModel("Notion", AppConst.colorTint, 1)
+            new SkillModel("Git", AppConst.colorTint, 3),
+            new SkillModel("Notion", AppConst.colorTint, 2)
     };
 
 
@@ -146,6 +154,7 @@
 
 <style>
     footer .link {
+        margin-top: 0.5rem;
         color: @AppConst.colorTint;
         transition-property: color;
     }

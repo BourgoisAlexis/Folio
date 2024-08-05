@@ -3,6 +3,7 @@
         None,
 
         Csharp,
+        Python,
         HTML,
         CSS,
         JS,
@@ -20,6 +21,7 @@
         Online,
         Multi,
         VR,
+        Mobile,
         Gamejam
     }
 }

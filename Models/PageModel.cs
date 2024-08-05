@@ -1,5 +1,5 @@
 ﻿namespace Folio.Models {
-    public struct PageModel {
+    public class PageModel {
         public string id;
         public string name;
         public string icon;
