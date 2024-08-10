@@ -50,6 +50,9 @@ namespace Folio.Models {
         public static string descriptionCountries =
             "Game created is solo in about 2 weeks using Unity, PlayerIO and Wikidata.";
 
+        public static string descriptionSpotify =
+            "Listen on Spotify";
+
         //About me
         public static string aboutMe =
             "Hi ! I'm Alexis, a game and more specificaly Unity programmer from France. " +

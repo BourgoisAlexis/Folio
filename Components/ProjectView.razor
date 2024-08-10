@@ -1,88 +1,61 @@
-﻿@using Folio.Models;
+﻿@using System.Numerics;
+@using Folio.Models;
 
-@if (!AppConst.mobile) {
-    <div class="project-container @(_hovered ? "project-container-hover" : null) animated" @onmouseenter=MouseEnter @onmouseleave=MouseExit @onclick=MouseClick>
-        <div style="margin:inherit">
-            <div class="project-frame stacker animated">
-                <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
-                <span class="stacked animated" style="cursor:@(GetCursorType())">@Project.description</span>
-            </div>
-            <div style="display:flex; justify-content:center; align-items:center">
-                <p>
-                    @Project.name
-                </p>
-            </div>
-            @if (Project.tags != null) {
 
-                <div class="frame-separator"></div>
-
-                int perLine = 3;
-
-                for (int y = 0; y < Project.tags.Length; y += perLine) {
-                    <div class="w-100">
-                        @for (int x = 0; x < perLine; x++) {
-                            int index = y + x;
-                            if (index < Project.tags.Length) {
-                                <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
-                            }
-                        }
-                    </div>
-                }
+<div class="project-card @(_hovered ? "project-card-hover" : null) animated" style="cursor:@(CursorType); height:@(CardHeight)"
+     @onmouseenter="@(AppConst.mobile ? null : MouseEnter)"
+     @onmouseleave="@(AppConst.mobile ? null : MouseLeave)"
+     @onclick=MouseClick>
+    <div class="card-bg animated"></div>
+    <div class="card-content animated">
+        <div class="image-frame" style="height:@(ImageHeight)">
+            <div class="image animated" style="background-image:url(@Project.backgroundURL); background-color:@(BackgroundColor)"></div>
+            <span class="stacked animated">@Project.description</span>
+            @if (Project.description == AppConst.descriptionSpotify) {
+                <i class="additional-icon bi-play stacked animated"></i>
             }
         </div>
-    </div>
-}
-else {
-    <div class="project-container @(_hovered ? "project-container-hover" : null) animated" @onclick=MouseClick>
-        <div style="margin:inherit">
-            <div class="project-frame stacker animated">
-                <div class="stacked bg-img animated" style="background-image:url(@Project.backgroundURL); background-color:@(GetBackgroundColor())"></div>
-                <span class="stacked animated" style="cursor:@(GetCursorType())">@Project.description</span>
-            </div>
-            <div style="display:flex; justify-content:center; align-items:center">
-                <p>
-                    @Project.name
-                </p>
-            </div>
-            @if (Project.tags != null) {
 
-                <div class="frame-separator"></div>
+        <p class="card-title" style="top:@(TitleTop)">@Project.name</p>
 
-                int perLine = 3;
+        @if (Project.tags != null) {
+            <div class="card-separator animated"></div>
 
-                for (int y = 0; y < Project.tags.Length; y += perLine) {
-                    <div class="w-100">
-                        @for (int x = 0; x < perLine; x++) {
-                            int index = y + x;
-                            if (index < Project.tags.Length) {
-                                <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
+            <div class="skills-frame">
+                @{
+                    int perLine = 3;
+                    for (int y = 0; y < Project.tags.Length; y += perLine) {
+                        <div class="w-100">
+                            @for (int x = 0; x < perLine; x++) {
+                                int index = y + x;
+                                if (index < Project.tags.Length) {
+                                    <SkillView Tag="Project.tags[index]" Height="1.8f" Width="3.5f" DisplayAsTag=true></SkillView>
+                                }
                             }
-                        }
-                    </div>
+                        </div>
+                    }
                 }
-            }
-        </div>
+            </div>
+        }
     </div>
-}
+</div>
 
 
 @inject IJSRuntime jsRuntime
 @code {
     [Parameter] public ProjectModel Project { get; set; }
 
-    private float _baseWidth = 14f;
-    private float _margin = 0.5f;
-    private float _widthVariation = 4f;
+    private float _animIntensity = 0.3f;
+    private float _baseHeight = 20f;
+    private float _baseWidth = 15f;
 
     private bool _hovered = false;
 
-    private string GetBackgroundColor() {
-        return string.IsNullOrEmpty(Project.backgroundURL) ? AppConst.colorSuperTone : "#00000000";
-    }
-
-    private string GetCursorType() {
-        return string.IsNullOrEmpty(Project.projectURL) ? "default" : "pointer";
-    }
+    private string CardHeight => Project.tags == null ? "15rem" : "19rem";
+    private string ImageHeight => Utils.FloatToREM((Project.tags == null ? 0.5f : 0.45f) * _baseHeight);
+    private string TitleTop => Utils.FloatToREM((Project.tags == null ? 0.55f : 0.5f) * _baseHeight);
+    private string BackgroundColor => string.IsNullOrEmpty(Project.backgroundURL) ? AppConst.colorSuperTone : "#00000000";
+    private string CursorType => string.IsNullOrEmpty(Project.projectURL) ? "default" : "pointer";
 
     private async void OpenProjectPage() {
         if (string.IsNullOrEmpty(Project.projectURL))
@@ -95,7 +68,7 @@ else {
         _hovered = true;
     }
 
-    private void MouseExit() {
+    private void MouseLeave() {
         _hovered = false;
     }
 
@@ -112,80 +85,141 @@ else {
 
 
 <style>
-    .project-container {
-        display: flex;
-        flex-direction: column;
+    .project-card {
+        position: relative;
         width: @(Utils.FloatToREM(_baseWidth));
-        text-align: center;
-        align-items: center;
-        margin: @(Utils.FloatToREM(_margin));
-        border-style: solid;
-        border-color: @(AppConst.colorTint);
-        border-radius: 1.5rem;
-        border-width: @(AppConst.narrowBorder);
-        pointer-events: none;
-        transition-property: width;
+        margin: 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0.4rem;
+        background-color: transparent;
     }
 
-        .project-container p {
-            font-size: large;
-            margin-top: @(Utils.FloatToREM(_margin));
-            margin-bottom: 0;
-            width: @(Utils.FloatToREM(_baseWidth - _margin * 4));
+        .project-card .card-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            background-color: transparent;
+            border-radius: inherit;
+            transition-property: background-color, top, right;
         }
 
-    .project-container-hover {
-        width: @(Utils.FloatToREM(_baseWidth + _widthVariation));
-        transition-property: width;
-    }
-
-        .project-container-hover .project-frame {
-            width: @(Utils.FloatToREM(_baseWidth + _widthVariation - _margin * 2));
+        .project-card .card-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            background-color: transparent;
+            border-radius: inherit;
+            transition-property: background-color, top, right;
         }
 
-            .project-container-hover .project-frame .bg-img {
-                filter: blur(5px) brightness(0.5);
+        .project-card .image-frame {
+            position: absolute;
+            width: 95%;
+            top: @(Utils.FloatToREM(_baseWidth * 0.025f));
+            left: 2.5%;
+            border-radius: 0.3rem;
+            overflow: hidden;
+            pointer-events: auto;
+        }
+
+            .project-card .image-frame .image {
+                height: 100%;
+                width: 100%;
+                background-position: center;
+                background-size: cover;
                 transition-property: filter;
             }
 
-            .project-container-hover .project-frame span {
-                color: @AppConst.light;
-                left: @(Utils.FloatToREM(_widthVariation / 2));
-                transition-property: color, left;
+            .project-card .image-frame span {
+                color: transparent;
+                width: 90%;
+                left: 5%;
+                font-size-adjust: inherit;
+                z-index: 10;
+                transition-property: color;
+                font-weight: bold;
             }
 
-    .project-frame {
-        width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
-        height: 10rem;
-        border-radius: 1rem;
-        overflow: hidden;
-        transition-property: width;
-        pointer-events: auto;
-    }
+            .project-card .image-frame .additional-icon {
+                position: absolute;
+                width: 90%;
+                top: 1.5rem;
+                left: 5%;
+                text-align: center;
+                font-size: 1.5rem;
+                color: transparent;
+                transition-property: color;
+            }
 
-        .project-frame span {
-            color: transparent;
-            z-index: 10;
-            width: @(Utils.FloatToREM(_baseWidth - _margin * 2));
-            font-size-adjust: inherit;
-            left: 0rem;
-            transition-property: color, left;
-            font-weight: bold;
+        .project-card .card-title {
+            position: absolute;
+            left: 5%;
+            width: 90%;
+            text-align: center;
+            font-size: large;
+            margin: inherit;
         }
 
-    .bg-img {
-        background-position: center;
-        background-size: cover;
-        z-index: 0;
-        transition-property: filter;
+        .project-card .card-separator {
+            position: absolute;
+            height: @(AppConst.narrowBorder);
+            width: 90%;
+            top: @(Utils.FloatToREM(0.6f * _baseHeight));
+            left: 5%;
+            border-radius: inherit;
+            background-color: @(AppConst.colorTint);
+            transition-property: background-color;
+        }
+
+        .project-card .skills-frame {
+            position: absolute;
+            left: 5%;
+            top: @(Utils.FloatToREM(0.65f * _baseHeight));
+            width: 90%;
+            height: @(Utils.FloatToREM(0.25f * _baseHeight));
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+    .project-card-hover {
     }
 
-    .frame-separator {
-        height: @(AppConst.narrowBorder);
-        width: 100%;
-        margin-top: @(Utils.FloatToREM(_margin));
-        margin-bottom: @(Utils.FloatToREM(_margin));
-        background-color: @(AppConst.colorSuperTone);
-        border-radius: @(AppConst.narrowBorder);
-    }
+        .project-card-hover .card-bg {
+            top: @(Utils.FloatToREM(_animIntensity));
+            right: @(Utils.FloatToREM(_animIntensity));
+            background-color: @(AppConst.colorSuperTone);
+            transition-property: background-color, top, right;
+        }
+
+        .project-card-hover .card-content {
+            top: @(Utils.FloatToREM(-_animIntensity));
+            right: @(Utils.FloatToREM(-_animIntensity));
+            background-color: @(AppConst.colorTint);
+            transition-property: top, right;
+        }
+
+        .project-card-hover .image-frame .image {
+            filter: blur(6px) brightness(0.4);
+            transition-property: filter;
+        }
+
+        .project-card-hover .image-frame span {
+            color: @AppConst.light;
+            transition-property: color;
+        }
+
+        .project-card-hover .image-frame .additional-icon {
+            color: @(AppConst.colorTint);
+            transition-property: color;
+        }
+
+        .project-card-hover .card-separator {
+            background-color: @(AppConst.light);
+            transition-property: background-color;
+        }
 </style>

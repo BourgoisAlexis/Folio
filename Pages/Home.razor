@@ -63,46 +63,56 @@
     protected override async Task OnInitializedAsync() {
 
         _professionnalProjects = new ProjectModel[] {
-            new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis, "/genesis.png",
+            new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis,
+                "https://mutantsgenesiswebsite.cdn.oxv.fr/images/en/media/Screen2.jpg",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.JS, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
                 "https://mutantsgenesis.com/en/"),
 
-            new ProjectModel("After chill", AppConst.descriptionAfterChill, "/after-chill.png",
+            new ProjectModel("After chill", AppConst.descriptionAfterChill,
+                "https://cdnb.artstation.com/p/assets/images/images/028/690/947/large/juliette-scherpereel-affiche-afterchill.jpg?1595234835",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Lead, TagEnum.VR}),
                 "https://www.artstation.com/artwork/183gnL"),
 
-            new ProjectModel("Les grands migrateurs", AppConst.descriptionGrandsMigrateurs, "/grands-migrateurs.png",
+            new ProjectModel("Les grands migrateurs", AppConst.descriptionGrandsMigrateurs,
+                "https://cdna.artstation.com/p/assets/images/images/025/615/964/large/axel-louarn-wallpaper-1080p.jpg?1586364465",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity}),
                 "https://www.choisistaplanete.com/les-grands-migrateurs")
     };
 
 
         _personnalProjects = new ProjectModel[] {
-            new ProjectModel("Countries game", AppConst.descriptionCountries, "/countries.png",
-                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.SPARQL, TagEnum.Unity, TagEnum.Multi, TagEnum.Online}),
-                "https://mikadaux.itch.io/countriesgame"),
-
-            new ProjectModel("Turbo Super Jump 2", AppConst.descriptionTurboSuperJump, "/turbo-super-jump.png",
-                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Mobile}),
-                "https://mikadaux.itch.io/turbo-super-jump-2"),
-
-            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch, "/versus-punch.png",
+            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch,
+                "https://img.itch.zone/aW1nLzMyMDI2MjguanBn/315x250%23c/qElE8H.jpg",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
                 "https://katra-production.itch.io/versus-punch"),
 
-            new ProjectModel("Femora", AppConst.descriptionFemora, "/femora.png",
+            new ProjectModel("Countries game", AppConst.descriptionCountries,
+                "https://img.itch.zone/aW1nLzE2MTQxMDAxLnBuZw==/315x250%23c/Yd6LTg.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.SPARQL, TagEnum.Unity, TagEnum.Multi, TagEnum.Online}),
+                "https://mikadaux.itch.io/countriesgame"),
+
+            new ProjectModel("Turbo Super Jump 2", AppConst.descriptionTurboSuperJump,
+                "https://img.itch.zone/aW1nLzE3MTgxNzYxLnBuZw==/315x250%23c/%2F5d%2FxG.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Mobile}),
+                "https://mikadaux.itch.io/turbo-super-jump-2"),
+
+            new ProjectModel("Femora", AppConst.descriptionFemora,
+                "https://img.itch.zone/aW1nLzYzMDAwOTYucG5n/315x250%23c/faBTXa.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.UI, TagEnum.UX}),
                 "https://piktura.itch.io/femora"),
 
-            new ProjectModel("Katra Ball", AppConst.descriptionKatraBall, "/katra-ball.png",
+            new ProjectModel("Katra Ball", AppConst.descriptionKatraBall,
+                "https://img.itch.zone/aW1nLzQ4ODEwOTYuanBn/315x250%23c/zbse0z.jpg",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Gamejam}),
                 "https://mikadaux.itch.io/katra-ball"),
 
-            new ProjectModel("Katra Heroes", AppConst.descriptionKatraHeroes, "/katra-heroes.png",
+            new ProjectModel("Katra Heroes", AppConst.descriptionKatraHeroes,
+                "/katra-heroes.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
                 ""),
 
-            new ProjectModel("This website", AppConst.descriptionFolio, "",
+            new ProjectModel("This website", AppConst.descriptionFolio,
+                "",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.HTML, TagEnum.CSS, TagEnum.dotnet, TagEnum.Razor}),
                 "")
     };
@@ -132,19 +142,22 @@
     };
 
         _favoriteGames = new ProjectModel[] {
-            new ProjectModel("Zelda: Breath of the wild", AppConst.descriptionBOTW, "/botw.png"),
-            new ProjectModel("Final fantasy XII", AppConst.descriptionFFXII, "/ff-xii.png"),
-            new ProjectModel("Abzu", AppConst.descriptionAbzu, "/abzu.png")
+            new ProjectModel("Zelda: Breath of the wild", AppConst.descriptionBOTW,
+                "https://images.igdb.com/igdb/image/upload/t_720p/ar4sz.webp"),
+            new ProjectModel("Final fantasy XII", AppConst.descriptionFFXII,
+                "https://images.igdb.com/igdb/image/upload/t_720p/ar7ys.webp"),
+            new ProjectModel("Abzu", AppConst.descriptionAbzu,
+                "https://images.igdb.com/igdb/image/upload/t_720p/arcrw.webp")
     };
 
         _favoriteArtists = new ProjectModel[] {
-            new ProjectModel("Nujabes", "Listen on Spotify",
+            new ProjectModel("Nujabes", AppConst.descriptionSpotify,
                 "https://i.scdn.co/image/ab676161000051742dd5a47714902a1db1810456", null,
                 "https://open.spotify.com/intl-fr/artist/3Rq3YOF9YG9YfCWD4D56RZ?si=221a8387f0014a5e"),
-            new ProjectModel("Charli xcx", "Listen on Spotify",
+            new ProjectModel("Charli xcx", AppConst.descriptionSpotify,
                 "https://i.scdn.co/image/ab67616100005174936885667ef44c306483c838", null,
                 "https://open.spotify.com/intl-fr/artist/25uiPmTg16RbhZWAqwLBy5?si=BSoMYzKgSZu-Kp6yH8yLTA"),
-            new ProjectModel("Slow Pulp", "Listen on Spotify",
+            new ProjectModel("Slow Pulp", AppConst.descriptionSpotify,
                 "https://i.scdn.co/image/ab6761610000f178af8de1de25f395082edc2251", null,
                 "https://open.spotify.com/intl-fr/artist/2JFTRDi5v7JtqoouVe1z5D?si=pBJWw01GRhC65bYFaPC_LQ"),
     };

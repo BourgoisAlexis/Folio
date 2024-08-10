@@ -14,8 +14,8 @@
 
 
 @inject BrowserService service
-@code{
-    protected override async Task OnInitializedAsync(){
+@code {
+    protected override async Task OnInitializedAsync() {
         AppConst.OnGetSize += () => StateHasChanged();
 
         WindowDimensions dimensions = await service.GetDimensions();
