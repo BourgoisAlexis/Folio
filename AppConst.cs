@@ -14,7 +14,9 @@ namespace Folio.Models {
         public static string colorSuperTone = "#7F6265";
 
         public static string narrowBorder = "2px";
+        public static string folioName = "Alexis Bourgois";
         public static int seniorLevel = 4;
+        public static bool loading = false;
 
         //Descriptions
         public static string descriptionBOTW =
@@ -36,19 +38,23 @@ namespace Folio.Models {
 
         public static string descriptionVersusPunch =
             "Game jam game created in 2019 with some friends of mine.";
+        public static string descriptionVersusPunchOnline =
+            "Recreating Versus Punch from scratch, to implement online features and better code as a personnal project.";
         public static string descriptionFemora =
-            "Game created during my master degree as the final project to present in front of pros.";
+            "Game created during my master degree as the final project to present in front of pros from the industry.";
         public static string descriptionKatraBall =
-            "Just a small side project to play a bit with physics.";
+            "Just a small side project to play a bit with Unity physics.";
         public static string descriptionTurboSuperJump =
-            "A quick side project of mobile game created in 2 days.";
+            "A quick side project of mobile game created in about 2 days.";
         public static string descriptionKatraHeroes =
             "Mobile strategy game with a TCG inspired twist. " +
             "Used Player.IO for the online part.";
         public static string descriptionFolio =
             "I wanted to experiment a bit with HTML and CSS (and web dev in general).";
         public static string descriptionCountries =
-            "Game created is solo in about 2 weeks using Unity, PlayerIO and Wikidata.";
+            "Game developed in solo in about 2 weeks using Unity, Player.IO and Wikidata.";
+        public static string descriptionBoop =
+            "A 1v1 board game developed in solo in a few weeks using Unity and Player.IO";
 
         public static string descriptionSpotify =
             "Listen on Spotify";

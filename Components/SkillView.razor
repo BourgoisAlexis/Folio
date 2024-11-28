@@ -1,17 +1,15 @@
-﻿@using Folio.Models
-@using Folio
-@using System.Globalization;
+﻿@using System.Globalization;
 
 <div class="skill-container stacker"
      style="height:@(Utils.FloatToREM(Height));
         width:@(Utils.FloatToREM(Width));
-        border-radius: @(GetBorderRadius());
-        background-color: @(GetColor());
+        border-radius: @(BorderRadius());
+        background-color: @(BackgroundColor());
         --fill-width: @(GetFillWidth());
         --basic-fill-width: @(AppConst.mobile ? GetFillWidth() : "0%");">
 
     <div class="stacked skill-fill animated"></div>
-    <span class="stacked" style="font-size:@(GetFontSize())">@(Tag.name)</span>
+    <span class="stacked" style="font-size:@(FontSize())">@(Tag.name)</span>
 </div>
 
 
@@ -31,17 +29,9 @@
         return $"{((ShowLevel && !DisplayAsTag) ? value : 0)}%";
     }
 
-    private string GetBorderRadius() {
-        return $"{Utils.ConvertFloatToString(Height * 0.5f)}rem";
-    }
-
-    private string GetFontSize() {
-        return $"{Utils.ConvertFloatToString(Height * 0.4f)}rem";
-    }
-
-    private string GetColor() {
-        return (ShowLevel && !DisplayAsTag) ? AppConst.colorSuperTone : Tag.color;
-    }
+    private string BorderRadius() => $"{Utils.ConvertFloatToString(Height * 0.5f)}rem";
+    private string FontSize() => $"{Utils.ConvertFloatToString(Height * 0.4f)}rem";
+    private string BackgroundColor() => (ShowLevel && !DisplayAsTag) ? AppConst.colorSuperTone : Tag.color;
 }
 
 
@@ -67,5 +57,4 @@
         background-color: @AppConst.colorTint;
         transition-property: width;
     }
-
 </style>

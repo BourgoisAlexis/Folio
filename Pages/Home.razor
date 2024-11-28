@@ -1,55 +1,54 @@
-﻿@using Folio.Models;
-@using Folio.Components;
-@using Folio.Client;
-@page "/"
+﻿@page "/"
 
-<PageTitle>Folio</PageTitle>
+<PageTitle>@AppConst.folioName</PageTitle>
 
-<h1>
-    Folio
-</h1>
+@if (AppConst.loading) {
+    <SpinningLoad></SpinningLoad>
+}
+else {
+    <h1>@AppConst.folioName</h1>
 
-<SeparatorView Vertical=true></SeparatorView>
-<SectionView ID="about" Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
-<br />
-<SectionView Title=@($"My favorite games") Projects="_favoriteGames"></SectionView>
-<br />
-<SectionView Title=@($"Some of the music artists I like") Projects="_favoriteArtists"></SectionView>
-<SeparatorView Vertical=true></SeparatorView>
-<SectionView ID="pro" Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
-<SeparatorView Vertical=true></SeparatorView>
-<SectionView ID="perso" Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
-<SeparatorView Vertical=true></SeparatorView>
-<SectionView ID="skills" Title=@($"Skills") Skills="_languages"></SectionView>
-<br />
-<SectionView Skills="_softwares"></SectionView>
-<br />
-<SectionView Skills="_skills"></SectionView>
-<SeparatorView Vertical=false></SeparatorView>
+    <SeparatorView Vertical=true></SeparatorView>
+    <SectionView ID="about" Title=@($"About me") Text=@AppConst.aboutMe></SectionView>
+    <br />
+    <SectionView Title=@($"My favorite games") Projects="_favoriteGames"></SectionView>
+    <br />
+    <SectionView Title=@($"Some of the music artists I like") Projects="_favoriteArtists"></SectionView>
+    <SeparatorView Vertical=true></SeparatorView>
+    <SectionView ID="pro" Title=@($"Professionnal projects") Projects="_professionnalProjects"></SectionView>
+    <SeparatorView Vertical=true></SeparatorView>
+    <SectionView ID="perso" Title=@($"Personnal projects") Projects="_personnalProjects"></SectionView>
+    <SeparatorView Vertical=true></SeparatorView>
+    <SectionView ID="skills" Title=@($"Skills") Skills="_languages"></SectionView>
+    <br />
+    <SectionView Skills="_softwares"></SectionView>
+    <br />
+    <SectionView Skills="_skills"></SectionView>
+    <SeparatorView Vertical=false></SeparatorView>
 
-@*opti tout ça*@
-<footer class="d-flex flex-column" style="text-align:center">
-    <SectionView ID="contacts" Title="Contacts & Links"></SectionView>
-    <div class="link animated">
-        <i style="margin-right:0.5rem; color:inherit" class="bi-envelope-at"></i>
-        <a style="color:inherit" href="mailto:bourgoisalexis@gmail.com" target="_blank">bourgoisalexis@gmail.com</a>
-    </div>
-    <div class="link animated">
-        <i style="margin-right:0.5rem; color:inherit" class="bi-github"></i>
-        <a style="color:inherit" href="https://github.com/BourgoisAlexis" target="_blank">Github</a>
-    </div>
-    <div class="link animated">
-        <i style="margin-right:0.5rem; color:inherit" class="bi-linkedin"></i>
-        <a style="color:inherit" href="https://www.linkedin.com/in/alexis-bourgois/" target="_blank">Linkedin</a>
-    </div>
-    <div class="link animated">
-        <i style="margin-right:0.5rem; color:inherit" class="bi-controller"></i>
-        <a style="color:inherit" href="https://mikadaux.itch.io/" target="_blank">Itch.io</a>
-    </div>
-</footer>
+    @*opti tout ça*@
+    <footer class="d-flex flex-column" style="text-align:center">
+        <SectionView ID="contacts" Title="Contacts & Links"></SectionView>
+        <div class="link animated">
+            <i style="margin-right:0.5rem; color:inherit" class="bi-envelope-at"></i>
+            <a style="color:inherit" href="mailto:bourgoisalexis@gmail.com" target="_blank">bourgoisalexis@gmail.com</a>
+        </div>
+        <div class="link animated">
+            <i style="margin-right:0.5rem; color:inherit" class="bi-github"></i>
+            <a style="color:inherit" href="https://github.com/BourgoisAlexis" target="_blank">Github</a>
+        </div>
+        <div class="link animated">
+            <i style="margin-right:0.5rem; color:inherit" class="bi-linkedin"></i>
+            <a style="color:inherit" href="https://www.linkedin.com/in/alexis-bourgois/" target="_blank">Linkedin</a>
+        </div>
+        <div class="link animated">
+            <i style="margin-right:0.5rem; color:inherit" class="bi-controller"></i>
+            <a style="color:inherit" href="https://mikadaux.itch.io/" target="_blank">Itch.io</a>
+        </div>
+    </footer>
 
-<AnchorNavigation></AnchorNavigation>
-
+    <AnchorNavigation></AnchorNavigation>
+}
 
 @code {
     private ProjectModel[] _professionnalProjects = new ProjectModel[] { };
@@ -61,6 +60,7 @@
     private SkillModel[] _skills = new SkillModel[] { };
 
     protected override async Task OnInitializedAsync() {
+        AppConst.loading = true;
 
         _professionnalProjects = new ProjectModel[] {
             new ProjectModel("Mutants: Genesis", AppConst.descriptionGenesis,
@@ -81,15 +81,20 @@
 
 
         _personnalProjects = new ProjectModel[] {
-            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch,
-                "https://img.itch.zone/aW1nLzMyMDI2MjguanBn/315x250%23c/qElE8H.jpg",
-                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
-                "https://katra-production.itch.io/versus-punch"),
+            new ProjectModel("Boop !", AppConst.descriptionBoop,
+                "https://img.itch.zone/aW1nLzE4NzUxMzQ1LnBuZw==/315x250%23c/%2BZ%2BThZ.png",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Online}),
+                "https://mikadaux.itch.io/boop"),
 
             new ProjectModel("Countries game", AppConst.descriptionCountries,
                 "https://img.itch.zone/aW1nLzE2MTQxMDAxLnBuZw==/315x250%23c/Yd6LTg.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.SPARQL, TagEnum.Unity, TagEnum.Multi, TagEnum.Online}),
                 "https://mikadaux.itch.io/countriesgame"),
+
+            new ProjectModel("Versus Punch", AppConst.descriptionVersusPunch,
+                "https://img.itch.zone/aW1nLzMyMDI2MjguanBn/315x250%23c/qElE8H.jpg",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Multi, TagEnum.Gamejam}),
+                "https://katra-production.itch.io/versus-punch"),
 
             new ProjectModel("Turbo Super Jump 2", AppConst.descriptionTurboSuperJump,
                 "https://img.itch.zone/aW1nLzE3MTgxNzYxLnBuZw==/315x250%23c/%2F5d%2FxG.png",
@@ -110,6 +115,11 @@
                 "/katra-heroes.png",
                 Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
                 ""),
+
+            new ProjectModel("Versus Punch Online", AppConst.descriptionVersusPunchOnline,
+                "",
+                Utils.GetTagsFromList(new TagEnum[]{TagEnum.Csharp, TagEnum.Unity, TagEnum.Online, TagEnum.Multi}),
+                "https://github.com/BourgoisAlexis/VersusPunchOnline"),
 
             new ProjectModel("This website", AppConst.descriptionFolio,
                 "",
@@ -161,6 +171,8 @@
                 "https://i.scdn.co/image/ab6761610000f178af8de1de25f395082edc2251", null,
                 "https://open.spotify.com/intl-fr/artist/2JFTRDi5v7JtqoouVe1z5D?si=pBJWw01GRhC65bYFaPC_LQ"),
     };
+
+        AppConst.loading = false;
     }
 }
 
